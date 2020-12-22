@@ -56,7 +56,24 @@ def meshPlot():
     pyplot.show()
     return None
 
+def gaussianModels():
+    n_samples = 200
+    mu1, sigma1 = -4, 1.2
+    mu2, sigma2 =  4, 1.8
+    mu3, sigma3 =  0, 1.6
+
+    x1 = np.random.normal(mu1, np.sqrt(sigma1), n_samples)
+    x2 = np.random.normal(mu2, np.sqrt(sigma2), n_samples)
+    x3 = np.random.normal(mu3, np.sqrt(sigma3), n_samples)
+
+    print(x1)
+    print(x2)
+    print(x3)
+
+    return None
+
 if __name__ == '__main__':
     
     meshPlot()
     bimodalDist()
+    gaussianModels()
