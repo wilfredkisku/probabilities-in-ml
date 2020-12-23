@@ -60,14 +60,26 @@ def pdf(data, mean: float, variance: float):
     s = 1/(np.sqrt(2*np.pi*variance))
     s = s * (np.exp(-(np.square(data - mean)/(2*variance))))
     return s
-def pdfClustering():
+
+def pdfClustering(X):
     k = 3
     weights = np.ones((k)) / k
+    
     #k value will give the base for the cluster number
     means = np.random.choice(X, k)
     variances = np.random.random_sample(size=k)
     
-    X = np.array(X)
+    eps = 1e-8
+    for step in range(25):
+
+        pyplot.figure(figure=(10,6))
+        axes = plt.gca()
+        pyplot.xlabel("$x$")
+        pyplot.ylable("pdf")
+        pyplot.title("Iteration {}".format(step))
+        pyplot.scatter(X, [0.] * len(X), color = 'navy', s = 30, marker = 2, label = "Train Data")
+
+        pyplot.plot(bins, )
 
 def gaussianModels():
     n_samples = 200
@@ -100,11 +112,11 @@ def gaussianModels():
     pyplot.legend()
     pyplot.plot()
     pyplot.show()
-    return None
+    return X, bins, mu1, mu2, mu3, sigma1, sigma2, sigma3
 
 if __name__ == '__main__':
     
     #meshPlot()
     #bimodalDist()
-    gaussianModels()
-    #pdfClustering()
+    data, bins, mu1, mu2, mu3, sigma1, sigma2, sigma3 = gaussianModels()
+    pdfClustering(data)
