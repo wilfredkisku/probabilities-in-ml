@@ -56,6 +56,19 @@ def meshPlot():
     pyplot.show()
     return None
 
+def pdf(data, mean: float, variance: float):
+    s = 1/(np.sqrt(2*np.pi*variance))
+    s = s * (np.exp(-(np.square(data - mean)/(2*variance))))
+    return s
+def pdfClustering():
+    k = 3
+    weights = np.ones((k)) / k
+    #k value will give the base for the cluster number
+    means = np.random.choice(X, k)
+    variances = np.random.random_sample(size=k)
+    
+    X = np.array(X)
+
 def gaussianModels():
     n_samples = 200
     mu1, sigma1 = -4, 1.2
@@ -70,10 +83,28 @@ def gaussianModels():
     print(x2)
     print(x3)
 
+    X = np.array(list(x1) + list(x2) + list(x3))
+    np.random.shuffle(X)
+    print(X.shape)
+    bins = np.linspace(np.min(X), np.max(X), 200)
+
+    pyplot.figure(figsize=(10,7))
+    pyplot.xlabel("$x$")
+    pyplot.ylabel("pdf")
+    pyplot.scatter(X, [0.005] * len(X), color='green', s=30, marker=2, label="Train data")
+
+    pyplot.plot(bins, pdf(bins, mu1, sigma1), color='red', label="True pdf")
+    pyplot.plot(bins, pdf(bins, mu2, sigma2), color='red')
+    pyplot.plot(bins, pdf(bins, mu3, sigma3), color='red')
+
+    pyplot.legend()
+    pyplot.plot()
+    pyplot.show()
     return None
 
 if __name__ == '__main__':
     
-    meshPlot()
-    bimodalDist()
+    #meshPlot()
+    #bimodalDist()
     gaussianModels()
+    #pdfClustering()
